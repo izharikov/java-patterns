@@ -9,24 +9,6 @@ public class Decorator {
     }
 }
 
-interface Shape {
-    void draw();
-}
-
-class Circle implements Shape {
-    @Override
-    public void draw() {
-        System.out.println("print circle");
-    }
-}
-
-class Rectangle implements Shape {
-    @Override
-    public void draw() {
-        System.out.println("print rectangle");
-    }
-}
-
 abstract class ShapeDecorator implements Shape {
     private Shape shape;
 
@@ -50,5 +32,39 @@ class WrapperDecorator extends ShapeDecorator {
     public void draw() {
         System.out.println("add some additional behaviour");
         super.draw();
+    }
+}
+
+interface Shape extends Cloneable {
+    void draw();
+}
+
+class Circle extends ShapeAbstract{
+    @Override
+    public void draw() {
+        System.out.println("print circle");
+    }
+}
+
+class Rectangle extends ShapeAbstract{
+    @Override
+    public void draw() {
+        System.out.println("print rectangle");
+    }
+}
+
+abstract class ShapeAbstract implements Shape{
+    @Override
+    public Object clone() {
+        Object clone = null;
+
+        try {
+            clone = super.clone();
+
+        } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+        }
+
+        return clone;
     }
 }
